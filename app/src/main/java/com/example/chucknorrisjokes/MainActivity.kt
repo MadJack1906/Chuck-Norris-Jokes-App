@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         Glide.with(this).load(imgUrl).apply(RequestOptions.overrideOf(900, 500)).into(binding.imgvImage)
 
+        // TODO: Add shared preference to store the joke locally, then learn retrofit!
+
         binding.btnCopyJoke.setOnClickListener(View.OnClickListener {
             val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData: ClipData = ClipData.newPlainText("Chuck Norris Joke", binding.tvJokeContainer.text.toString())
