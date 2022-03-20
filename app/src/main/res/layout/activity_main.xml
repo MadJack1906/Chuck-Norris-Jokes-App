@@ -47,16 +47,20 @@
                 android:id="@+id/imgvImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                />
+                android:maxHeight="100dp"
+                android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/tvJokeContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="along time ago Chuck Norris met an Asian kid also named Chuck Norris. Not pleased with there being another Chuck Norris so he punched him so hard the name on the the Asian kid's birth certificate changed to Bruce Lee."
+                android:drawableStart="@drawable/textview_mark"
                 android:textColor="@color/blkTxtClr"
+
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent" />
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCopyJoke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.Button.Borderless"

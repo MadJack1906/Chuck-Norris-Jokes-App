@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/drawable/chuck norris_background.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/drawable/textview_mark.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
       </map>
     </option>
