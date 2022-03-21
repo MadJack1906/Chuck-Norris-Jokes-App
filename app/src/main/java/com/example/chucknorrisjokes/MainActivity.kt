@@ -47,7 +47,10 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(it.context, "Copied !", Toast.LENGTH_SHORT).show()
         }
 
-        binding.swipeRefreshLayout.setOnRefreshListener { binding.swipeRefreshLayout.isRefreshing = false }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getRandomJoke()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     fun getRandomJoke() {
