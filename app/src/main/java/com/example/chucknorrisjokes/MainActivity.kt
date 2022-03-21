@@ -26,16 +26,16 @@ class MainActivity : AppCompatActivity() {
 
         // TODO: Add shared preference to store the joke locally, then learn retrofit!
 
-        binding.btnCopyJoke.setOnClickListener(View.OnClickListener {
+        binding.btnCopyJoke.setOnClickListener {
             val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData: ClipData = ClipData.newPlainText("Chuck Norris Joke", binding.tvJokeContainer.text.toString())
             clipboard.setPrimaryClip(clipData)
-            Toast.makeText(it.context, "Joke Copied Successfully!", Toast.LENGTH_SHORT).show()
-        })
+            Toast.makeText(it.context, "Copied !", Toast.LENGTH_SHORT).show()
+        }
 
-        binding.fabRefreshFacts.setOnClickListener( View.OnClickListener {
-            Toast.makeText(it.context, binding.tvJokeContainer.getText().toString(), Toast.LENGTH_SHORT).show()
-        })
+        binding.fabRefreshFacts.setOnClickListener{
+            Toast.makeText(it.context, binding.tvJokeContainer.text.toString(), Toast.LENGTH_SHORT).show()
+        }
 
         binding.fabRefreshFacts.setOnLongClickListener {
             Toast.makeText(it.context, "Refresh Joke", Toast.LENGTH_SHORT).show()
