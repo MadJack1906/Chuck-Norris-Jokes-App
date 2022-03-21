@@ -33,13 +33,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(it.context, "Copied !", Toast.LENGTH_SHORT).show()
         }
 
-        binding.fabRefreshFacts.setOnClickListener{
-            Toast.makeText(it.context, binding.tvJokeContainer.text.toString(), Toast.LENGTH_SHORT).show()
-        }
-
-        binding.fabRefreshFacts.setOnLongClickListener {
-            Toast.makeText(it.context, "Refresh Joke", Toast.LENGTH_SHORT).show()
-            return@setOnLongClickListener true
-        }
+        binding.swipeRefreshLayout.setOnRefreshListener { binding.swipeRefreshLayout.isRefreshing = false }
     }
 }
