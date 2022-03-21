@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clipData: ClipData = ClipData.newPlainText("Chuck Norris Joke", binding.tvJokeContainer.text.toString())
             clipboard.setPrimaryClip(clipData)
-            Toast.makeText(it.context, "Copied !", Toast.LENGTH_SHORT).show()
+            Toast.makeText(it.context, "Copied!", Toast.LENGTH_SHORT).show()
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getRandomJoke() {
+    private fun getRandomJoke() {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(API_URL)
