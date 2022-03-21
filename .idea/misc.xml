@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/drawable/chuck norris_background.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/drawable/chuck_norris_background.xml" value="0.115" />
         <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/drawable/textview_mark.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/mipmap-anydpi-v26/chuck_norris.xml" value="0.115" />
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/mipmap-anydpi-v26/chuck_norris_round.xml" value="0.115" />
+        <entry key="..\:/Users/chosu/AndroidStudioProjects/ChuckNorrisJokes/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.115" />
       </map>
     </option>
   </component>
