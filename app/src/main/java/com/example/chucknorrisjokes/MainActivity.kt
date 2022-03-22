@@ -23,9 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var chuckNorrisApi: ChuckNorrisApi
     private val imgUrl: String = "https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png"
     private val API_URL: String = "https://api.chucknorris.io/jokes/"
-    private lateinit var jokeContainer: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,34 +33,41 @@ class MainActivity : AppCompatActivity() {
         val rootView = binding.root
         setContentView(rootView)
 
-        getRandomJoke()
-        jokeContainer = binding.tvJokeContainer
-
+        chuckNorrisApi = buildChuckNorrisApi() // Retrofit API builder
+        // Fetches and Renders the Image of the api site
         Glide.with(this).load(imgUrl).apply(RequestOptions.overrideOf(900, 500)).into(binding.imgvImage)
+
+        getRandomJoke(chuckNorrisApi)
 
         // TODO: Add shared preference to store the joke locally, then learn retrofit!
 
-        binding.btnCopyJoke.setOnClickListener {
-            val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData: ClipData = ClipData.newPlainText("Chuck Norris Joke", binding.tvJokeContainer.text.toString())
-            clipboard.setPrimaryClip(clipData)
-            Toast.makeText(it.context, "Copied!", Toast.LENGTH_SHORT).show()
-        }
+        // Copies the joke to the clipboard
+        binding.btnCopyJoke.setOnClickListener { copyJoke(it) }
 
+        // Upon swiping the app will fetch a joke from the server
         binding.swipeRefreshLayout.setOnRefreshListener {
-            getRandomJoke()
+            getRandomJoke(chuckNorrisApi)
             binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
-    private fun getRandomJoke() {
-        val retrofitBuilder = Retrofit.Builder()
+    private fun copyJoke(it: View) {
+        val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData: ClipData = ClipData.newPlainText("Chuck Norris Joke", binding.tvJokeContainer.text.toString())
+        clipboard.setPrimaryClip(clipData)
+        Toast.makeText(it.context, "Copied!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun buildChuckNorrisApi(): ChuckNorrisApi {
+        return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(API_URL)
             .build()
             .create(ChuckNorrisApi::class.java)
+    }
 
-        val jokeData = retrofitBuilder.getRandomJoke()
+    private fun getRandomJoke(apiBuilder: ChuckNorrisApi) {
+        val jokeData = apiBuilder.getRandomJoke()
         jokeData.enqueue(object : Callback<Joke>{
             override fun onResponse(call: Call<Joke>, response: Response<Joke>) {
                 val responseBody = response.body()!!
@@ -71,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Joke>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "Failed to fetch the joke", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 }
