@@ -3,6 +3,7 @@ package com.example.chucknorrisjokes
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chuckNorrisApi: ChuckNorrisApi
     private val imgUrl: String = "https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png"
     private val API_URL: String = "https://api.chucknorris.io/jokes/"
+    private lateinit var jokeSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +32,15 @@ class MainActivity : AppCompatActivity() {
         val rootView = binding.root
         setContentView(rootView)
 
+        jokeSharedPreferences = getPreferences(Context.MODE_PRIVATE) // Creating a shared preference to save the joke
+        binding.tvJokeContainer.text = jokeSharedPreferences.getString("joke", "Joke is empty!")
+
+
         chuckNorrisApi = buildChuckNorrisApi() // Retrofit API builder
         // Fetches and Renders the Image of the api site
         Glide.with(this).load(imgUrl).apply(RequestOptions.overrideOf(900, 500)).into(binding.imgVImage)
 
         getRandomJoke(chuckNorrisApi)
-
-        // TODO: Add shared preference to store the joke locally, then learn retrofit!
 
         // Copies the joke to the clipboard
         binding.btnCopyJoke.setOnClickListener { copyJoke(it) }
@@ -63,12 +67,17 @@ class MainActivity : AppCompatActivity() {
             .create(ChuckNorrisApi::class.java)
     }
 
+    private fun saveJoke(joke: String){
+        jokeSharedPreferences.edit().putString("joke", joke).apply()
+    }
+
     private fun getRandomJoke(apiBuilder: ChuckNorrisApi) {
         val jokeData = apiBuilder.getRandomJoke()
         jokeData.enqueue(object : Callback<Joke>{
             override fun onResponse(call: Call<Joke>, response: Response<Joke>) {
                 val responseBody = response.body()!!
                 binding.tvJokeContainer.text = responseBody.mValue
+                saveJoke(responseBody.mValue)
                 Log.d("HTTP RESPONSE", responseBody.mValue)
             }
 
