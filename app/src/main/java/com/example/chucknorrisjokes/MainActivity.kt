@@ -1,20 +1,17 @@
 package com.example.chucknorrisjokes
 
-import android.app.AppOpsManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.chucknorrisjokes.HttpRequest.ChuckNorrisApi
 import com.example.chucknorrisjokes.databinding.ActivityMainBinding
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         chuckNorrisApi = buildChuckNorrisApi() // Retrofit API builder
         // Fetches and Renders the Image of the api site
-        Glide.with(this).load(imgUrl).apply(RequestOptions.overrideOf(900, 500)).into(binding.imgvImage)
+        Glide.with(this).load(imgUrl).apply(RequestOptions.overrideOf(900, 500)).into(binding.imgVImage)
 
         getRandomJoke(chuckNorrisApi)
 
